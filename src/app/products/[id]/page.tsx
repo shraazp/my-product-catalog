@@ -1,14 +1,13 @@
+import React from "react";
 import ProductDetail from "@/components/ProductDetail";
 import { fetchProductById } from "@/lib/api";
 
-interface ProductPageProps {
-  params: {
-    id: string;
-  };
-}
 
-export default async function ProductPage({ params }: ProductPageProps) {
-  const product = await fetchProductById(params.id);
+export default async function ProductPage(params: { 
+ params: Promise<{ id: string }>}) {
+  const { id } = await params.params;
+   const product = await fetchProductById(id);
+
   return (
     <div className="w-full px-0">
       <ProductDetail product={product} />
